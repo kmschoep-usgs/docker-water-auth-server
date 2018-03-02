@@ -35,7 +35,6 @@
         water_auth:
           aliases:
             - water_auth_server
-      command: --spring.profiles.active=localDev --spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.session.SessionAutoConfiguration
       secrets:
         - source: tomcat_ssl_crt
           target: /tomcat-wildcard-ssl.crt
