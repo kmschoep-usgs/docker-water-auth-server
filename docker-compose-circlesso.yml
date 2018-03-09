@@ -13,10 +13,15 @@
       file: ./certificates/oauth2/oauth2-wildcard-dev.crt
     oauth_ssl_key:
       file: ./certificates/oauth2/oauth2-wildcard-dev.key
+    saml_ssl_crt:
+      file: ./certificates/saml/saml-wildcard-dev.crt
+    saml_ssl_key:
+      file: ./certificates/saml/saml-wildcard-dev.key
 
   services:
     database:
       image: mysql:8
+      entrypoint: ['/entrypoint.sh', '--default-authentication-plugin=mysql_native_password']
       networks:
         water_auth:
           aliases:
@@ -25,12 +30,13 @@
         - MYSQL_ROOT_PASSWORD=changeMe
         - MYSQL_USER=mysqluser
         - MYSQL_PASSWORD=mysqluser
+        - MYSQL_DATABASE=waterauth
 
     server:
       build: .
       image: water-auth-server
       ports:
-        - "8443:8443"
+        - "443:443"
       networks:
         water_auth:
           aliases:
@@ -44,5 +50,9 @@
           target: /oauth-wildcard-ssl.crt
         - source: oauth_ssl_key
           target: /oauth-wildcard-ssl.key
+        - source: saml_ssl_crt
+          target: /saml-wildcard-ssl.crt
+        - source: saml_ssl_key
+          target: /saml-wildcard-ssl.key
       env_file:
-        - docker-compose-local-dev.env
+        - docker-compose-circlesso.env
