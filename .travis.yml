@@ -17,7 +17,7 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 install:
-  - docker-compose -d -f docker-compose-local-dev.yml up --build
+  - docker-compose -f docker-compose-local-dev.yml up -d --build
 
 script:
   - docker ps | grep -q water-auth-server
