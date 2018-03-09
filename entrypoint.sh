@@ -45,4 +45,4 @@ fi
 
 java -Djava.security.egd=file:/dev/./urandom -DdbPassword=$MYSQL_PASSWORD_VAL -DkeystorePassword=$KEYSTORE_PASSWORD -jar app.jar $@
 
-exec "$@"
+exec env "$@"
