@@ -15,17 +15,6 @@
       file: ./certificates/oauth2/oauth2-wildcard-dev.key
 
   services:
-    database:
-      image: mysql:8
-      networks:
-        water_auth:
-          aliases:
-            - container.database.docker
-      environment:
-        - MYSQL_ROOT_PASSWORD=changeMe
-        - MYSQL_USER=mysqluser
-        - MYSQL_PASSWORD=mysqluser
-
     server:
       build: .
       image: water-auth-server
