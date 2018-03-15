@@ -42,7 +42,7 @@ You can now try to navigate to `https://<Docker IP>/saml/login` and test whether
   - autoapprove: true
 
 - Example mock Oauth2 Client SQL:
-  - `insert into waterauth.oauth_client_details(client_id,resource_ids,client_secret,scope,authorized_grant_types,web_server_redirect_uri,authorities access_token_validity,refresh_token_validity,additional_information,autoapprove) values ("test-id", null, "test-secret", "read,write", "authorization_code,access_token,refresh_token", "127.0.0.1", null, 36000, 36000, null, true);`
+  - `insert into waterauth.oauth_client_details(client_id,resource_ids,client_secret,scope,authorized_grant_types,web_server_redirect_uri,authorities,access_token_validity,refresh_token_validity,additional_information,autoapprove) values ("test-id", null, "test-secret", "read,write", "authorization_code,access_token,refresh_token", "127.0.0.1", null, 36000, 36000, null, true);`
 
 - Login through WaterAuth (if you aren't already logged in) and make sure you get to the page saying `You are logged in as <username>`.
 
