@@ -1,7 +1,5 @@
 #!/bin/sh
-set -ex
-
-echo $PWD
+set -e
 
 if [ $dbPassword ]; then
     MYSQL_PASSWORD_VAL=$dbPassword
@@ -17,17 +15,17 @@ fi
 
 if [ -n "${TOMCAT_CERT_PATH}" ]; then
   openssl pkcs12 -export -in $TOMCAT_CERT_PATH -inkey $TOMCAT_KEY_PATH -name $keystoreSSLKey -out tomcat.p12 -password pass:$KEYSTORE_PASSWORD
-  keytool -v -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeystore $keystoreLocation -deststoretype JKS -srckeystore tomcat.p12 -srcstorepass $KEYSTORE_PASSWORD -srcstoretype PKCS12 -noprompt
+  keytool -v -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeystore $keystoreLocation -deststoretype PKCS12 -srckeystore tomcat.p12 -srcstorepass $KEYSTORE_PASSWORD -srcstoretype PKCS12 -noprompt
 fi
 
 if [ -n "${TOKEN_CERT_PATH}" ]; then
   openssl pkcs12 -export -in $TOKEN_CERT_PATH -inkey $TOKEN_KEY_PATH -name $keystoreOAuthKey -out oauth.p12 -password pass:$KEYSTORE_PASSWORD
-  keytool -v -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeystore $keystoreLocation -deststoretype JKS -srckeystore oauth.p12 -srcstorepass $KEYSTORE_PASSWORD -srcstoretype PKCS12 -noprompt
+  keytool -v -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeystore $keystoreLocation -deststoretype PKCS12 -srckeystore oauth.p12 -srcstorepass $KEYSTORE_PASSWORD -srcstoretype PKCS12 -noprompt
 fi
 
 if [ -n "${SAML_CERT_PATH}" ]; then
   openssl pkcs12 -export -in $SAML_CERT_PATH -inkey $SAML_KEY_PATH -name $keystoreSAMLKey -out saml.p12 -password pass:$KEYSTORE_PASSWORD
-  keytool -v -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeystore $keystoreLocation -deststoretype JKS -srckeystore saml.p12 -srcstorepass $KEYSTORE_PASSWORD -srcstoretype PKCS12 -noprompt
+  keytool -v -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeystore $keystoreLocation -deststoretype PKCS12 -srckeystore saml.p12 -srcstorepass $KEYSTORE_PASSWORD -srcstoretype PKCS12 -noprompt
 fi
 
 if [ -d "${CERT_IMPORT_DIRECTORY}" ]; then
