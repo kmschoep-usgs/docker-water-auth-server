@@ -10,14 +10,14 @@ ARG mlr_version=0.1.0
 
 RUN curl -k -o app.jar -X GET "https://cida.usgs.gov/artifactory/mlr-maven-centralized/gov/usgs/wma/waterauthserver/$mlr_version/waterauthserver-$mlr_version.jar"
 
-EXPOSE 8443
-
 ADD entrypoint.sh entrypoint.sh
 
 RUN chmod +x entrypoint.sh
+
+ENV serverPort 8443
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
 CMD [ "--spring.profiles.active=default" ]
 
-HEALTHCHECK CMD curl -k 'https://127.0.0.1:8443/health' | grep -q '{"status":"UP"}' || exit 1
+HEALTHCHECK CMD curl -s -o /dev/null -w "%{http_code}" -k "https://127.0.0.1:${serverPort}/saml/metadata" | grep -q '200' || exit 1
