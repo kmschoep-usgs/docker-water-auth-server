@@ -11,7 +11,7 @@ This Docker image implements the [USGS Water Auth Server](https://github.com/USG
   - If using Docker Machine, use `docker-machine ip <machine name>`
 - Edit docker-compose-circlesso.env
   - Update samlAuthnRequestProviderName to be `https://<docker IP>:443/saml/`
-  - Update samlAuthnRequestEntityId to be `https://<docker IP>:443/saml/`
+  - Update samlAuthnRequestEntityId to be some unqiue ID of your choosing. When uploading the metadata to SSOCircle if you get an error about the entity already existing then come back and change this to another value.
   - Update waterAuthUrlServerName to be your docker IP
 - Start the WaterAuth Docker container via `docker-compose -f docker-compose-circlesso.yml up --build`
 - When the server is running, in another terminal run the following command
@@ -25,3 +25,34 @@ This Docker image implements the [USGS Water Auth Server](https://github.com/USG
 - Log out
 
 You can now try to navigate to `https://<Docker IP>/saml/login` and test whether or not you are able to perform the log in through CircleSSO back to your Docker service. If successful, you should see a message that says `You're logged in as <username>`
+
+## Testing Oauth2 JWT Tokens
+
+- Create a mock Oauth2 client application in the WaterAuth database. Example values provided below.
+  - client_id: Some unique id
+  - resource_ids: null
+  - client_secert: Some secret passphrase
+  - scope: read,write
+  - authorized_grant_types: authorization_code,access_token,refresh_token
+  - web_server_redirect_uri: Some URL that doesn't point to a running service. I.E: 127.0.0.1
+  - authorities: null
+  - access_token_validity: 36000
+  - refresh_token_validity: 36000
+  - additional_information: null
+  - autoapprove: true
+
+- Example mock Oauth2 Client SQL:
+  - `insert into waterauth.oauth_client_details(client_id,resource_ids,client_secret,scope,authorized_grant_types,web_server_redirect_uri,authorities access_token_validity,refresh_token_validity,additional_information,autoapprove) values ("test-id", null, "test-secret", "read,write", "authorization_code,access_token,refresh_token", "127.0.0.1", null, 36000, 36000, null, true);`
+
+- Login through WaterAuth (if you aren't already logged in) and make sure you get to the page saying `You are logged in as <username>`.
+
+- In a browser navigate to `https://<water auth host>/oauth/authorize?client_id=<client_id you created earlier>&redirect_uri=<redirect_uri you created earlier>&response_type=code`
+
+- Wait a moment and you should be redirected to an an error page or non-existing page. The URL in your browser's URL bar should have a query parameter called "code". Copy the value of this parameter.
+
+- Open up a bash terminal and run the following:
+  - `curl -k https://<client_id you created earlier>:<client_secert you created earlier>@<water auth host>/oauth/token -d grant_type=authorization_code -d code=<code you copied in step 4> -d redirect_uri=<redirect_uri you created earlier> --output <some file to output the resultant JSON to>`
+
+- This command should execute give you a JSON document containing your generated JSON Web Token (JWT). Note that **the code you genrated in step 3 can only be used _once_** so if some error occurs during the the process (i.e the redirect uri does not match the one you specified in the DB) you will need to jump back up to step 3 and continue from there.
+
+- Grab the value of the "access_token" field from the JSON document you retrieved in step 6 and navigate a web brwoser to `https://jwt.io/`.
