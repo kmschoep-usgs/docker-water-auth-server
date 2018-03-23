@@ -6,7 +6,7 @@ RUN set -x & \
   apk add --no-cache curl && \
   apk --no-cache add openssl
 
-ARG mlr_version=0.1.0
+ARG mlr_version=0.3.4
 
 RUN curl -k -o app.jar -X GET "https://cida.usgs.gov/artifactory/mlr-maven-centralized/gov/usgs/wma/waterauthserver/$mlr_version/waterauthserver-$mlr_version.jar"
 
