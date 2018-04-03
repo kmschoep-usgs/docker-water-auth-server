@@ -13,6 +13,10 @@ else
   KEYSTORE_PASSWORD=`cat $KEYSTORE_PASSWORD_FILE`
 fi
 
+if [ -f "${keystoreLocation}" ]; then
+  rm $keystoreLocation
+fi
+
 if [ -n "${TOMCAT_CERT_PATH}" ]; then
   openssl pkcs12 -export -in $TOMCAT_CERT_PATH -inkey $TOMCAT_KEY_PATH -name $keystoreSSLKey -out tomcat.p12 -password pass:$KEYSTORE_PASSWORD
   keytool -v -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeystore $keystoreLocation -deststoretype PKCS12 -srckeystore tomcat.p12 -srcstorepass $KEYSTORE_PASSWORD -srcstoretype PKCS12 -noprompt

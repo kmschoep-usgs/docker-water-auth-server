@@ -5,6 +5,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [UNRLEASED]
 ### Updated
+- isuftin@usgs.gov - Completely remove the keystore if it exists early in the
+  entrypoint
 
 ## [0.1.3] - 2018-04-03
 ### Updated
