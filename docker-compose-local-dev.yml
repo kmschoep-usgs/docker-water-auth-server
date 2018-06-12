@@ -16,6 +16,7 @@
 
   services:
     server:
+      container_name: server
       build: .
       image: water-auth-server
       ports:
