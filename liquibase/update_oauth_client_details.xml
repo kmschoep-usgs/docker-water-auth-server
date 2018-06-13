@@ -6,18 +6,15 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
   logicalFilePath="liquibase_change_set/update_oauth_client_details.xml">
+  
   <preConditions>
     <dbms type="mysql"/>
     <tableExists schemaName="waterauth" tableName="oauth_client_details"/>
   </preConditions>
 
-  <changeSet id="tag_0.0.1" author="owi-devops@usgs.gov">
-    <tagDatabase tag="tag_0.0.1"/>
-  </changeSet>
-
-  <changeSet id="oauth_client_details_0.0.1" author="owi-devops@usgs.gov">
-    <comment>Creates a test client 1</comment>
-    <loadUpdateData encoding="UTF-8" file="data/oauth_client_1_data.csv" primaryKey="client_id" quotchar="&quot;" schemaName="waterauth" separator="," tableName="oauth_client_details">
+  <changeSet id="oauth_client_details" author="owi-devops@usgs.gov" runOnChange="true" failOnError="true">
+    <comment>Adds or updates oauth_client_details table with csv data</comment>
+    <loadUpdateData encoding="UTF-8" file="data/oauth_client_data.csv" primaryKey="client_id" quotchar="&quot;" schemaName="waterauth" separator="," tableName="oauth_client_details">
       <column header="client_id" name="client_id" type="STRING"/>
       <column header="resource_ids" name="resource_ids" type="STRING"/>
       <column header="client_secret" name="client_secret" type="STRING"/>
@@ -30,12 +27,5 @@
       <column header="additional_information" name="additional_information" type="STRING"/>
       <column header="autoapprove" name="autoapprove" type="STRING"/>
     </loadUpdateData>
-    <rollback>
-      <rollback changeSetId="tag_0.0.1" changeSetAuthor="owi-devops@usgs.gov"/>
-    </rollback>
-  </changeSet>
-
-  <changeSet id="tag_0.0.2" author="owi-devops@usgs.gov">
-    <tagDatabase tag="tag_0.0.2"/>
   </changeSet>
 </databaseChangeLog>
