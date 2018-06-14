@@ -4,9 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [UNRLEASED]
-### Updated
+### Removed
 - isuftin@usgs.gov - Completely remove the keystore if it exists early in the
   entrypoint
+### Added
+- isuftin@usgs.gov - Add example liquibase code for client updates
+- isuftin@usgs.gov - Added container names to compose config
 
 ## [0.1.3] - 2018-04-03
 ### Updated
