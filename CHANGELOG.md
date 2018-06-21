@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [UNRLEASED]
+
+## [0.3.6] - 2018-06-21
+### Updated
+- zmoore@usgs.gov - Updated the Water Auth Java artifact version to 0.3.6.
 ### Removed
 - isuftin@usgs.gov - Completely remove the keystore if it exists early in the
   entrypoint
