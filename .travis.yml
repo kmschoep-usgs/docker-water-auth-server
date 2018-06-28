@@ -2,6 +2,8 @@ sudo: required
 
 language: ruby
 
+dist: trusty
+
 env:
   - DOCKER_COMPOSE_VERSION=1.19.0
 
@@ -13,11 +15,17 @@ before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
+  - curl -L https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64 > clair-scanner
+  - chmod +x clair-scanner
   - sudo mv docker-compose /usr/local/bin
+  - sudo mv clair-scanner /usr/local/bin
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 install:
   - docker build -t water-auth-server .
+  - docker run -p 5432:5432 -d --name db arminc/clair-db
+  - docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.3
+  - clair-scanner -c "http://127.0.0.1:6060" --ip $(hostname -I) water-auth-server:latest
   - docker-compose -f docker-compose-local-dev.yml up -d --build
 
 script:
