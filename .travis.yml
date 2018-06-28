@@ -25,8 +25,8 @@ install:
   - docker build -t water-auth-server .
   - docker run -d --name db arminc/clair-db
   - docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.3
-  - clair-scanner -c "http://127.0.0.1:6060" --ip "$(hostname -I)" water-auth-server:latest
   - docker-compose -f docker-compose-local-dev.yml up -d --build
 
 script:
+  - set -x && clair-scanner -c "http://127.0.0.1:6060" --ip "$(hostname -I)" water-auth-server:latest
   - docker ps | grep -q water-auth-server
