@@ -29,5 +29,5 @@ install:
 
 script:
   - ip -4 a
-  - set -x && clair-scanner -c "http://127.0.0.1:6060" --ip "$(hostname -i)" water-auth-server:latest
+  - set -x && clair-scanner -c "http://127.0.0.1:6060" --ip "$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')" water-auth-server:latest
   - docker ps | grep -q water-auth-server
