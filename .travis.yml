@@ -28,5 +28,6 @@ install:
   - docker-compose -f docker-compose-local-dev.yml up -d --build
 
 script:
-  - set -x && clair-scanner -c "http://127.0.0.1:6060" --ip "$(hostname -I)" water-auth-server:latest
+  - ip -4 a
+  - set -x && clair-scanner -c "http://127.0.0.1:6060" --ip "$(hostname -i)" water-auth-server:latest
   - docker ps | grep -q water-auth-server
