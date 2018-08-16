@@ -2,7 +2,7 @@ FROM openjdk:8-jdk-alpine
 
 RUN apk update && apk add --no-cache curl openssl
 
-ARG water_auth_version=0.3.7
+ARG water_auth_version=0.3.8-SNAPSHOT
 
 RUN curl -k -o app.jar -X GET "https://cida.usgs.gov/artifactory/mlr-maven-centralized/gov/usgs/wma/waterauthserver/$water_auth_version/waterauthserver-$water_auth_version.jar"
 
