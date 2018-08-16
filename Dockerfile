@@ -1,9 +1,6 @@
 FROM openjdk:8-jdk-alpine
 
-RUN set -x & \
-  apk update && \
-  apk add --no-cache curl && \
-  apk --no-cache add openssl
+RUN apk update && apk add --no-cache curl openssl
 
 ARG water_auth_version=0.3.7
 
