@@ -53,7 +53,7 @@ ENV localOauthResourceId=local-app
 ENV localUserName=user
 ENV localUserRole="ACTUATOR, DBA_EXAMPLE"
 ENV localUserEmail=localuser@example.gov
-ENV localContextPath=/auth
+ENV localContextPath=/auth/
 
 COPY --chown=1000:1000 launch-app.sh ${LAUNCH_APP_SCRIPT}
 RUN chmod +x ${LAUNCH_APP_SCRIPT}
