@@ -10,10 +10,10 @@ ENV LOCAL_DEV_SPRING_ARGS="--spring.profiles.active=localDev --spring.autoconfig
 
 ENV serverPort=8443
 ENV requireSsl=true
-ENV serverContextPath=/auth
+ENV serverContextPath=/auth/
 ENV waterAuthUrlServerPort=8443
 ENV waterAuthUrlServerName=localhost
-ENV waterAuthUrlContextPath=/auth
+ENV waterAuthUrlContextPath=/auth/
 ENV dbInitializerEnabled=true
 ENV dbConnectionUrl=jdbc:mysql://auth.example.gov/db
 ENV dbUsername=mysqluser
@@ -60,4 +60,4 @@ RUN chmod +x ${LAUNCH_APP_SCRIPT}
 
 RUN ./pull-from-artifactory.sh mlr-maven-centralized gov.usgs.wma waterauthserver ${artifact_version} app.jar
 
-HEALTHCHECK CMD curl -s -o /dev/null -w "%{http_code}" -k "https://127.0.0.1:${serverPort}/oauth/token_key" | grep -q '200' || exit 1
+HEALTHCHECK CMD curl -s -o /dev/null -w "%{http_code}" -k "https://127.0.0.1:${serverPort}${serverContextPath}oauth/token_key" | grep -q '200' || exit 1
