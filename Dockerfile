@@ -60,4 +60,4 @@ RUN chmod +x ${LAUNCH_APP_SCRIPT}
 
 RUN ./pull-from-artifactory.sh mlr-maven-centralized gov.usgs.wma waterauthserver ${artifact_version} app.jar
 
-HEALTHCHECK CMD curl -s -o /dev/null -w "%{http_code}" -k "https://127.0.0.1:${serverPort}/saml/metadata" | grep -q '200' || exit 1
+HEALTHCHECK CMD curl -s -o /dev/null -w "%{http_code}" -k "https://127.0.0.1:${serverPort}/oauth/token_key" | grep -q '200' || exit 1
