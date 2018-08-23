@@ -6,7 +6,7 @@ ENV artifact_version=0.3.8-SNAPSHOT
 
 ENV LOCAL_DEV_MODE=false
 ENV STANDARD_SPRING_ARGS="--spring.profiles.active=default"
-ENV LOCAL_DEV_SPRING_ARGS="--spring.profiles.active=localDev --spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.session.SessionAutoConfiguration"
+ENV LOCAL_DEV_SPRING_ARGS="--spring.profiles.active=localDev --spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.session.SessionAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"
 
 ENV serverPort=8443
 ENV requireSsl=true
@@ -51,6 +51,7 @@ ENV localOauthClientGrantTypes="authorization_code, access_token, refresh_token,
 ENV localOauthClientScopes=user_details
 ENV localOauthResourceId=local-app
 ENV localUserName=user
+ENV localUserPassword=chanegMe
 ENV localUserRole="ACTUATOR, DBA_EXAMPLE"
 ENV localUserEmail=localuser@example.gov
 ENV localContextPath=/auth/
