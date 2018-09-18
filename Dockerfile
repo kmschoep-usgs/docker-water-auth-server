@@ -35,7 +35,6 @@ ENV samlUsernameAttributeNames=http://schemas.microsoft.com/ws/2008/06/identity/
 ENV loginSuccessTargetUrl=/
 ENV loginErrorTargetUrl=/auth-error
 ENV logoutSuccessTargetUrl=/out
-ENV samlIncludeGroups=
 ENV samlLoggingIncludeMessages=false
 ENV samlLoggingIncludeErrors=true
 ENV springFrameworkLogLevel=info
