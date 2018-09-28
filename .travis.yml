@@ -4,7 +4,7 @@ env:
   global:
      - DOCKER_COMPOSE_VERSION=1.22.0
      - DOCKER_IMAGE=waterauth
-     - SPRING_BOOT_BASE_IMAGE_VERSION=java8-0.0.2
+     - SPRING_BOOT_BASE_IMAGE_VERSION=latest
 
 services:
   - docker
