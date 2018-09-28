@@ -1,8 +1,8 @@
-FROM cidasdpdasartip.cr.usgs.gov:8447/wma/wma-spring-boot-base:latest
+FROM cidasdpdasartip.cr.usgs.gov:8447/wma/wma-spring-boot-base:java8-0.0.2
 
 LABEL maintaner="gs-w_eto@usgs.gov"
 
-ENV artifact_version=0.3.8-SNAPSHOT
+ENV artifact_version=0.3.7
 
 ENV LOCAL_DEV_MODE=false
 ENV STANDARD_SPRING_ARGS="--spring.profiles.active=default"
