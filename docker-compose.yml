@@ -15,7 +15,7 @@
     waterauth:
       container_name: waterauth
       build: .
-      image: water-auth-server
+      image: waterauth
       ports:
         - "8443:8443"
       secrets:

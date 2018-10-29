@@ -38,7 +38,7 @@
     server:
       container_name: server
       build: .
-      image: water-auth-server
+      image: waterauth
       ports:
         - "8443:8443"
       networks:
