@@ -4,7 +4,6 @@ env:
   global:
      - DOCKER_COMPOSE_VERSION=1.22.0
      - DOCKER_IMAGE=waterauth
-     - SPRING_BOOT_BASE_IMAGE_VERSION=latest
 
 services:
   - docker
@@ -18,12 +17,6 @@ before_install:
   - chmod +x clair-scanner
   - sudo mv clair-scanner /usr/local/bin
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-  - openssl genrsa -out .travis/wildcard.key 2048
-  - openssl req -nodes -newkey rsa:2048 -keyout  .travis/wildcard.key -out  .travis/wildcard.csr -subj "/C=US/ST=Wisconsin/L=Middleon/O=US Geological Survey/OU=WMA/CN=*"
-  - openssl x509 -req -days 9999 -in .travis/wildcard.csr -signkey .travis/wildcard.key  -out .travis/wildcard.crt
-  - docker run -d -p 8444:443 -p 8080:80 -v ${PWD}/.travis/nginx.conf:/etc/nginx/nginx.conf -v ${PWD}/.travis/wildcard.crt:/etc/nginx/wildcard.crt -v ${PWD}/.travis/wildcard.key:/etc/nginx/wildcard.key nginx:latest && sleep 5
-  - docker pull localhost:8444/wma/wma-spring-boot-base:${SPRING_BOOT_BASE_IMAGE_VERSION}
-  - docker tag localhost:8444/wma/wma-spring-boot-base:${SPRING_BOOT_BASE_IMAGE_VERSION} cidasdpdasartip.cr.usgs.gov:8447/wma/wma-spring-boot-base:${SPRING_BOOT_BASE_IMAGE_VERSION}
   - git clone https://github.com/docker/docker-bench-security.git
 
 install:
