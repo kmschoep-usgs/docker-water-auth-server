@@ -18,7 +18,7 @@ This is the mode that will be run when doing `docker-compose up` without overrid
 - Find out your Docker IP
   - If using Docker natively, it will be localhost (or 127.0.0.1)
   - If using Docker Machine, use `docker-machine ip <machine name>`
-- Edit circlesso-config.env
+- Edit circlesso-config.env 
   - Update samlAuthnRequestProviderName to be `https://<docker IP>:443/saml/`
   - Update samlAuthnRequestEntityId to be some unqiue ID of your choosing. When uploading the metadata to SSOCircle if you get an error about the entity already existing then come back and change this to another value.
   - Update waterAuthUrlServerName to be your docker IP
