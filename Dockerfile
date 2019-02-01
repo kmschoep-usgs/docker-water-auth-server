@@ -2,8 +2,7 @@ FROM usgswma/wma-spring-boot-base:8-jre-slim
 
 LABEL maintaner="gs-w_eto@usgs.gov"
 
-ENV artifact_version=0.3.8
-
+ENV artifact_version=0.4.0-SNAPSHOT
 ENV LOCAL_DEV_MODE=false
 ENV STANDARD_SPRING_ARGS="--spring.profiles.active=default"
 ENV LOCAL_DEV_SPRING_ARGS="--spring.profiles.active=localDev --spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.session.SessionAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"
