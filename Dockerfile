@@ -2,7 +2,7 @@ FROM usgswma/wma-spring-boot-base:8-jre-slim
 
 LABEL maintaner="gs-w_eto@usgs.gov"
 
-ENV artifact_version=0.3.8-SNAPSHOT
+ENV artifact_version=0.3.8
 
 ENV LOCAL_DEV_MODE=false
 ENV STANDARD_SPRING_ARGS="--spring.profiles.active=default"
