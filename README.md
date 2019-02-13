@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/USGS-CIDA/docker-water-auth-server.svg?branch=master)](https://travis-ci.org/USGS-CIDA/docker-water-auth-server)
 
+DEPRECATED - Use https://github.com/USGS-CIDA/Water-Auth-Server instead
+
 This Docker image implements the [USGS Water Auth Server](https://github.com/USGS-CIDA/Water-Auth-Server)
 
 ## Launchable Modes
