@@ -1,4 +1,4 @@
-FROM usgswma/wma-spring-boot-base:8-jre-slim
+FROM usgswma/wma-spring-boot-base:8-jre-slim-0.0.4
 
 LABEL maintaner="gs-w_eto@usgs.gov"
 
